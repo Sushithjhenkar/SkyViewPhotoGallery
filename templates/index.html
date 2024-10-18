@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/index.css">
+    <title>SkyView</title>
+</head>
+<body>
+    <header>
+        <h2>Hello, Welcome to</h2>
+        <h1 style="color: black;">SkyView</h1>
+        <h3>A simple photo gallery in the cloud 🌥</h3>
+    </header>
+
+    <main>
+        <form method="post" enctype="multipart/form-data" action="/upload" id="upload-form">
+            <div id="form">
+                <label for="file">Choose a file to upload:</label><br><br>
+            </div>
+            <div id="input1">
+                <input type="file" id="file" name="form_file" accept="image/jpeg,jpg" required/>
+            </div>
+            <div id="button">
+                <button style="width: 100%;" type="submit">Submit</button>
+            </div>
+        </form>
+
+        <h2>Uploaded Files</h2>
+        <div id="gallery">
+            {% for file, description in files.items() %}
+            <div class="image-container">
+                <a href="{{ url_for('view_image', user_id=user_id, filename=file) }}">
+                    <img src="{{ url_for('files', user_id=user_id, filename=file) }}" alt="Image" class="thumbnail">
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        
+    </main>
+    <form method="post" action="/logout" style="display: inline;" id="button1">
+        <button type="submit">Logout</button>
+    </form>
+</body>
+</html>
